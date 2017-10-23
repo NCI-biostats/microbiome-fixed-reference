@@ -1,8 +1,8 @@
 rm(list = ls())
 #setwd('change this if needed')
-source('../code-microbiome-helper-functions.r')
+source('code-microbiome-helper-functions.r')
 
-d.full <- read.csv('yw-HMP_data_082816-5-sites-level2-mm.csv')
+d.full <- read.csv('data/yw-HMP_data_082816-5-sites-level2-mm.csv')
 
 # list of unique id's
 u.id <- unique(d.full$id)
@@ -47,25 +47,6 @@ out
 # Set (B)        72     83   62    87      47
 
 
-do <- d
-
-d$bc     <- as.matrix(get.distances.wrt.ref.mean.vec(d, dp, measure = 'bc.mg', ref.ix = d.ref.ix1), ncol = 1)
-d$corr.s <- as.matrix(get.distances.wrt.ref.mean.vec(d, dp, measure = 'corr', method = 'spearman', ref.ix = d.ref.ix1), ncol = 1) # spearman
-d$corr.p <- as.matrix(get.distances.wrt.ref.mean.vec(d, dp, measure = 'corr', method = 'pearson', ref.ix = d.ref.ix1), ncol = 1) # pearson
-
-save(d, file = 'mm-HMP_data_082816-5-sites-level2-stool-ref-half-sample-mean-wrt-ref-mean-vec.rdata')
-rm(d)
-
-d <- do
-d$bc     <- as.matrix(get.distances.wrt.ref.mean.vec(d, dp, measure = 'bc.mg', ref.ix = d.ref.ix2), ncol = 1)
-d$corr.s <- as.matrix(get.distances.wrt.ref.mean.vec(d, dp, measure = 'corr', method = 'spearman', ref.ix = d.ref.ix2), ncol = 1) # spearman
-d$corr.p <- as.matrix(get.distances.wrt.ref.mean.vec(d, dp, measure = 'corr', method = 'pearson', ref.ix = d.ref.ix2), ncol = 1) # pearson
-
-save(d, file = 'mm-HMP_data_082816-5-sites-level2-nasal-ref-half-sample-mean-wrt-ref-mean-vec.rdata')
-rm(d)
-
-
-
 d <- do
 d$bc1     <- as.matrix(get.distances.wrt.ref.mean.vec(d, dp, measure = 'bc.mg', ref.ix = d.ref.ix1), ncol = 1)
 d$corr.s1 <- as.matrix(get.distances.wrt.ref.mean.vec(d, dp, measure = 'corr', method = 'spearman', ref.ix = d.ref.ix1), ncol = 1) # spearman
@@ -79,7 +60,7 @@ sites <- c('stool', 'nasal', 'skin', 'saliva', 'vaginal')
 
 
 # ~~~~~~~~~~~~~~~
-# get the means for each site with respect to stool and nasal
+# get the means for each site with respect to stool and nasal using bc distance
 mu.bc <- matrix(NA, ncol = 2, nrow = length(sites))  # columns: wrt stool, wrt nasal
 rownames(mu.bc) <- sites
 colnames(mu.bc) <- c('ref.stool', 'ref.nasal')
@@ -93,7 +74,7 @@ for(i in 1:5){
 
 
 # ~~~~~~~~~~~~~~~
-# get the means for each site with respect to stool and nasal
+# get the means for each site with respect to stool and nasal using pearson corrlation distance.
 mu.pc <- matrix(NA, ncol = 2, nrow = length(sites)) # columns: wrt stool, wrt nasal
 rownames(mu.pc) <- sites
 colnames(mu.pc) <- c('ref.stool', 'ref.nasal')
@@ -106,8 +87,8 @@ for(i in 1:5){
 }
 # ~~~~~~~~~~~~~~~
 
-save(d, mu.pc, mu.bc, file = 'mm-HMP_data_082816-5-sites-level2-stool-nasal-refs-half-sample-mean-wrt-ref-mean-vec.rdata')
-save(d, dp, mu.pc, mu.bc, file = 'mm-HMP_data_082816-5-sites-level2-stool-nasal-refs-half-sample-mean-raw-rel-abu-wrt-ref-mean-vec.rdata')
+#save(d, mu.pc, mu.bc, file = 'mm-HMP_data_082816-5-sites-level2-stool-nasal-refs-half-sample-mean-wrt-ref-mean-vec.rdata')
+#save(d, dp, mu.pc, mu.bc, file = 'mm-HMP_data_082816-5-sites-level2-stool-nasal-refs-half-sample-mean-raw-rel-abu-wrt-ref-mean-vec.rdata')
 
 rm(d)
 
