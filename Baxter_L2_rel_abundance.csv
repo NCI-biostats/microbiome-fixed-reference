@@ -1,5 +1,5 @@
 Sample.ID,diagnosis_s,fit_result_s,DiseaseState,k__Archaea;p__Euryarchaeota,k__Bacteria;p__Actinobacteria,k__Bacteria;p__Bacteroidetes,k__Bacteria;p__Cyanobacteria,k__Bacteria;p__Firmicutes,k__Bacteria;p__Fusobacteria,k__Bacteria;p__Proteobacteria,k__Bacteria;p__Synergistetes,k__Bacteria;p__TM7,k__Bacteria;p__Tenericutes,k__Bacteria;p__Verrucomicrobia,k__Bacteria;p__[Thermi]
-SRR2143517,High Risk Normal,0,H,0.000705827,0.001294016,0.368598541,0.005725041,0.558779704,3.92E-05,0.016430084,0,0,0.025135284,0.023253078,3.92E-05
+SRR2143517,High Risk Normal ,0,H,0.000705827,0.001294016,0.368598541,0.005725041,0.558779704,3.92E-05,0.016430084,0,0,0.025135284,0.023253078,3.92E-05
 SRR2143516,High Risk Normal,0,H,0.018870086,0.030753372,0.329267245,0.000687226,0.577413166,2.86E-05,0.022191679,0,0,0.000744495,0.020044097,0
 SRR2143527,Normal,0,H,0,0.003512725,0.106442206,0,0.722097031,0,0.000994168,0,0,0,0.166953871,0
 SRR2143526,Cancer,1509,CRC,0.002571494,0.035855747,0.06963771,0,0.842350843,0,0.025466083,4.15E-05,0,4.15E-05,0.024035171,0
