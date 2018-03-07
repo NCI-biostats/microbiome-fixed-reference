@@ -191,11 +191,11 @@ HMPdistance <- function(tax.level = NULL,                 # one of: 'l2.phylum',
 
     # these are the possible taxonomy levels, tax.level needs to be one of these
     tax.levels <- c('l2.phylum', 'l3.class', 'l4.order', 'l5.family', 'l6.genus')
-    # this should load gg.taxonomy.file, d.ref.stool, d.ref.nasal, d.ref.stool.info, d.ref.nasal.info
-
-    source_data("https://github.com/NCI-biostats/microbiome-fixed-reference/blob/master/taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata?raw=True")
 
     # load('taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata')
+    source_data("https://github.com/NCI-biostats/microbiome-fixed-reference/blob/master/taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata?raw=True")
+    # this should load gg.taxonomy.file, d.ref.stool, d.ref.nasal, d.ref.stool.info, d.ref.nasal.info
+=
     # make sure things loaded correctly
     if(!length(c(grep('d.ref.stool', ls()), grep('d.ref.nasal', ls()), grep('gg.taxonomy.file', ls()))) >= 5){
         print('You need to be connected to the internet - file taxonomy-GG13-8-and-HMP-references.rdata needs to load from https://github.com/NCI-biostats/microbiome-fixed-reference. Exiting...', q = F)
