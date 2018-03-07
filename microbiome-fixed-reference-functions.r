@@ -17,7 +17,7 @@
 # out:
 # returns the Hotelling t^2 statistic and bootstrap pvalue (if nBoot is not NULL)
 #   accounting for correlation between samples from the same individual
-GHotelling <- function(data, nBoot = NULL, print.details = F, seed = 1){
+GHotelling <- function(data, nBoot = 10000, print.details = F, seed = 1){
 
     colnames(data) <- c('x1', 'y1', 'x2', 'y2')
     n <- dim(data)[1]
