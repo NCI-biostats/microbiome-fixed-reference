@@ -1,5 +1,5 @@
 sample.id,rsid,sex,site,Root;Other,Root;p__Acidobacteria,Root;p__Actinobacteria,Root;p__Armatimonadetes,Root;p__Bacteroidetes,Root;p__CCM11b,Root;p__Chloroflexi,Root;p__Cyanobacteria,Root;p__Euryarchaeota,Root;p__Firmicutes,Root;p__Fusobacteria,Root;p__GN02,Root;p__Gemmatimonadetes,Root;p__Lentisphaerae,Root;p__Nitrospirae,Root;p__Planctomycetes,Root;p__Proteobacteria,Root;p__SC4,Root;p__SR1,Root;p__Spirochaetes,Root;p__Synergistetes,Root;p__TM7,Root;p__Tenericutes,Root;p__Thermi,Root;p__Verrucomicrobia,Root;p__WPS-2,Root;p__ZB2
-700013549,158013734,female,stool,0,0,0.000566572,0,0.580547686,0,0,0,0.000377715,0.341643059,0,0,0,0,0,0,0.018319169,0,0,0,0,0,0.01605288,0,0.042492918,0,0
+70001354,158013734,female,stool,0,0,0.000566572,0,0.580547686,0,0,0,0.000377715,0.341643059,0,0,0,0,0,0,0.018319169,0,0,0,0,0,0.01605288,0,0.042492918,0,0
 700014954,158822939,male,stool,0.001370305,0,0.003707883,0,0.684749315,0,0,0,0,0.263985168,0,0,0,0,0,0,0.029904885,0,0,0,0,0,0.016121232,0,0.000161212,0,0
 700014965,158822939,male,saliva,7.98E-05,0,0.04275004,0,0.291434041,0,0,0,0,0.38084224,0.045142766,0,0,0,0,0,0.231376615,0,0,0.001914181,0.000159515,0.000478545,0.0058223,0,0,0,0
 700015001,158822939,male,skin,0,0,0.358974359,0.051282051,0.051282051,0,0.012820513,0,0,0.025641026,0.08974359,0,0,0,0,0,0.41025641,0,0,0,0,0,0,0,0,0,0
