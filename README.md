@@ -15,6 +15,7 @@ date: "March 7, 2018"
 
 
 # Introduction
+For a nicer version of this tutorial go to [http://rpubs.com/NCI-biostats/microbiome-fixed-reference](http://rpubs.com/NCI-biostats/microbiome-fixed-reference).
 
 In this tutorial we describe and show examples of R code implementing methods to use standard microbiome reference groups to simplify beta-diversity analyses and faclitate independent validation as described in **Using standard microbiome reference groups to simplify beta-diversity analyses and facilitate independent validation** by Marlena Maziarz, Ruth M. Pfeiffer, Yunhu Wan and Mitchell H. Gail. The code, test files, HMP reference sets and any other necessary files are on [https://github.com/NCI-biostats/microbiome-fixed-reference](https://github.com/NCI-biostats/microbiome-fixed-reference).
 
