@@ -1,18 +1,3 @@
----
-title: "Standard reference for microbiome analysis"
-output:
-  html_document:
-    collapsed: no
-    keep_md: yes
-    toc: yes
-    toc_float: yes
-  pdf_document:
-    toc: yes
-date: "March 7, 2018"
----
-
-
-
 
 # Introduction
 For a nicer version of this tutorial go to [http://rpubs.com/NCI-biostats/microbiome-fixed-reference](http://rpubs.com/NCI-biostats/microbiome-fixed-reference).
