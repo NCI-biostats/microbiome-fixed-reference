@@ -1,16 +1,14 @@
 ---
 title: "Standard reference for microbiome analysis"
-#author: Marlena Maziarz
-#output: 
-#    html_document:
-#        toc: TRUE
-date: "March 7, 2018"
-output: 
-  html_document: 
+output:
+  html_document:
+    collapsed: no
     keep_md: yes
     toc: yes
-    toc_float: yes 
-    collapsed: false
+    toc_float: yes
+  pdf_document:
+    toc: yes
+date: "March 7, 2018"
 ---
 
 
@@ -18,7 +16,7 @@ output:
 
 # Introduction
 
-In this tutorial we describe and show examples of R code implementing methods to use standard microbiome reference groups to simplify beta-diversity analyses and faclitate independent validation as described in ``Using standard microbiome reference groups to simplify beta-diversity analyses and facilitate independent validation'' by Marlena Maziarz, Ruth M. Pfeiffer, Yunhu Wan and Mitchell H. Gail. The code, test files, HMP reference sets and any other necessary files are on [https://github.com/NCI-biostats/microbiome-fixed-reference](https://github.com/NCI-biostats/microbiome-fixed-reference).
+In this tutorial we describe and show examples of R code implementing methods to use standard microbiome reference groups to simplify beta-diversity analyses and faclitate independent validation as described in **Using standard microbiome reference groups to simplify beta-diversity analyses and facilitate independent validation** by Marlena Maziarz, Ruth M. Pfeiffer, Yunhu Wan and Mitchell H. Gail. The code, test files, HMP reference sets and any other necessary files are on [https://github.com/NCI-biostats/microbiome-fixed-reference](https://github.com/NCI-biostats/microbiome-fixed-reference).
 
 This tutorial describes the use of two functions: **HMPdistance** and **GHotelling**. HMPdistance calculates distance to the HMP stool and nasal reference sets, GHotelling is a generalized Hotelling test, which accounts for correlation between samples from the same individual.
 
@@ -88,11 +86,10 @@ If you decide not to use Greengenes13.8 for your microbiome analysis pipeline, u
 
 2.	In order to use the **HMPdistance** function to compute distances at a given level, you need to:
 
- a.	Use the naming conventions as in GG13.8 (also shown in GG_13_8_taxonomy-used-in-reference.xlsx) for each level. 
+2a.	Use the naming conventions as in GG13.8 (also shown in GG_13_8_taxonomy-used-in-reference.xlsx) for each level. 
 
- b. At a given level, any name that is not in GG13.8 will be assigned missing values up to the lowest level at which the sequence does match a sequence in GG13.8. For example, let K.P.O.C.F.G (kingdom.phylum.order.class.family.genus) denote a particular sequence in GG13.8 and let K.P.O.C.f.g denote a sequence to be classified at the genus level but one that is not in GG13.8. The string will match the one in GG13.8 at the kingdom, phylum, order and class levels, but not at family or genus. It will be assigned K.P.O.C.f._ first, a match will be searched for and not found (since family *f* is also not in GG13.8), it will then be assigned K.P.O.C.\_.\_ and at that point a match will be found in GG13.8. This effectively means that any *leaves$ not found in the reference set will be collapsed and the relative abundances for those summed up and saved at the next level up that is found in GG13.8. Note, not all missingness patterns are in GG13.8. As a rule, if a given name string is not found in GG13.8, the lowest non-missing level will be assigned as missing and an attempt at matching will be made, and this process will repeat until a match is found or K.\_.\_.\_.\_.\_ is reached. 
-
-c. Be connected to the internet, since **HMPdistance** function needs to download **taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata** from GitHub
+2b. At a given level, any name that is not in GG13.8 will be assigned missing values up to the lowest level at which the sequence does match a sequence in GG13.8. For example, let K.P.O.C.F.G (kingdom.phylum.order.class.family.genus) denote a particular sequence in GG13.8 and let K.P.O.C.f.g denote a sequence to be classified at the genus level but one that is not in GG13.8. The string will match the one in GG13.8 at the kingdom, phylum, order and class levels, but not at family or genus. It will be assigned K.P.O.C.f._ first, a match will be searched for and not found (since family *f* is also not in GG13.8), it will then be assigned K.P.O.C.\_.\_ and at that point a match will be found in GG13.8. This effectively means that any *leaves$ not found in the reference set will be collapsed and the relative abundances for those summed up and saved at the next level up that is found in GG13.8. Note, not all missingness patterns are in GG13.8. As a rule, if a given name string is not found in GG13.8, the lowest non-missing level will be assigned as missing and an attempt at matching will be made, and this process will repeat until a match is found or K.\_.\_.\_.\_.\_ is reached. 
+2c. Be connected to the internet, since **HMPdistance** function needs to download **taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata** from GitHub
 
 
 ## Example of **HMPdistance**
@@ -203,8 +200,20 @@ Only the following missingness patterns are permitted and any of these groups ca
 ### Output from **GHotelling**
 A list with two elements: $t2$ and $pval$, where $t2$ is the $T^2$ test statistic and $pval$ is the p-value based on nBoot bootstrap resamples. 
 
-## Example of GHotelling()
+## Example of **GHotelling**
 ### Load test dataset (site A = nasal, site B = saliva)
+Here, rows = individuals, columns = distances to HMP stool and nasal references, where columns 1 and 2 are output from HMPdistance to ref.stool and ref.nasal for 72 nasal samples, and columns 3 and 4 = output from HMPdistance to ref.stool and ref.nasal for 83 saliva samples.
+
+In this test set we have the following groups:
+
+- Group 1 (rows 1-6) are subjects contributing distances from nasal samples only to HMP stool and HMP nasal $(A_{stool}, A_{nasal}, NA, NA)$
+
+- Group 3 (rows 7-72) are subjects contributing distances from nasal and saliva samples to HMP stool and HMP nasal $(A_{stool}, A_{nasal}, B_{stool}, B_{nasal})$
+
+- Group 2 (rows 73-89) are subjects contributing distances from saliva samples only to HMP stool and HMP nasal reference sets $(NA, NA, B_{stool}, B_{nasal})$
+
+To load the test file: 
+
 
 ```r
 source_data("https://github.com/NCI-biostats/microbiome-fixed-reference/blob/master/test-matrix.rdata?raw=True")
@@ -215,21 +224,15 @@ source_data("https://github.com/NCI-biostats/microbiome-fixed-reference/blob/mas
 ```
 
 ```r
-# rows = individuals, columns = distances to HMP stool and nasal references
-# columns 1 and 2 = output from HMPdistance to ref.stool and ref.nasal for 72 nasal samples
-# columns 3 and 4 = output from HMPdistance to ref.stool and ref.nasal for 83 saliva samples
 dim(test.mx)
 ```
 
 ```
 ## [1] 89  4
 ```
+And here are 3 rows from groups 1, 3, and 2:
 
 ```r
-# rows for subjects contributing only nasal samples are A_x1, A_y1, NA, NA
-# rows for subjects contributing both nasal and saliva samples are A_x1, A_y1, B_x2, B_y2
-# rows for subjects contributing only saliva samples are NA, NA, B_x2, B_y2
-# here are three rows from each group:
 test.mx[c(1:3, 20:22, 87:89),]
 ```
 
@@ -245,9 +248,9 @@ test.mx[c(1:3, 20:22, 87:89),]
 ##  [8,]        NA        NA 0.3365672 0.6291558
 ##  [9,]        NA        NA 0.6546568 0.6203346
 ```
+Here, we have subjects who contribute information to groups 1, 2 and 3:
 
 ```r
-# subjects contribute information to group 1, 2 and 3.
 GHotelling(test.mx, nBoot = 10000, print.details = F, seed = 1)
 ```
 
@@ -259,9 +262,9 @@ GHotelling(test.mx, nBoot = 10000, print.details = F, seed = 1)
 ## [1] 0
 ```
 
+We also handle scenarios where individuals from one of the groups are missing, for example, where we only have data for individuals in group 3 and 2, 1 and 2, or 1 and 3. Here we show an example where we do not have anyone from group 3, i.e. each individual contributes information from one body site only:
 
 ```r
-# now, exclude group 3, ie. each individual contributes information from one body site only
 GHotelling(test.mx[-(7:72),], nBoot = 10000, print.details = F, seed = 1)
 ```
 
