@@ -186,20 +186,32 @@ HMPdistance <- function(tax.level = NULL,                 # one of: 'l2.phylum',
                         d.new.filename = NULL,            # new data csv filename (together with path if needed to be read in by read.csv) or rdata file (with path)
                         d.new.ix.col.not.rel.abu = NULL,  # index of columns that are not relative abunance columns (ie. index of metadata)
                         measure = 'bc',                   # 'bc' for Bray-Curtis, 'corr' for 1-Pearson correlation
-                        print.details = F){
+                        print.details = F,
+                        source.directly.from.github = F){
 
 
     # these are the possible taxonomy levels, tax.level needs to be one of these
     tax.levels <- c('l2.phylum', 'l3.class', 'l4.order', 'l5.family', 'l6.genus')
 
-    
-    # load('taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata')
-    source_data("https://github.com/NCI-biostats/microbiome-fixed-reference/blob/master/taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata?raw=True")
+    if(source.directly.from.github){
+        # check if repmis is installed, if not, ask the user to install it.
+        if("repmis" %in% rownames(installed.packages()) == FALSE){
+            # install.packages('repmis')
+            print("Package repmis needs to be installed - run install.packages('repmis'). Exiting... ", q = F)
+            return(NULL)
+        }
+        require(repmis) # for sourcing rdata from GitHub
+        source_data("https://github.com/NCI-biostats/microbiome-fixed-reference/blob/master/taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata?raw=True")
+    }else{
+        load('taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata')
+    }
     # this should load gg.taxonomy.file, d.ref.stool, d.ref.nasal, d.ref.stool.info, d.ref.nasal.info
 
     # make sure things loaded correctly
     if(!length(c(grep('d.ref.stool', ls()), grep('d.ref.nasal', ls()), grep('gg.taxonomy.file', ls()))) >= 5){
-        print('You need to be connected to the internet - file taxonomy-GG13-8-and-HMP-references.rdata needs to load from https://github.com/NCI-biostats/microbiome-fixed-reference. Exiting...', q = F)
+        print('taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata did not load correctly. If source.directly.from.github = F, this file needs to be in your current directory.
+              If source.directly.from.github = T, You need to be connected to the internet,
+              taxonomy-GG13-8-and-HMP-reference-sets-L2-L6.rdata needs to load from https://github.com/NCI-biostats/microbiome-fixed-reference. Exiting...', q = F)
         return(NULL)
     }
     d.gg.ra <- get.relative.abundance.matrix(tax.level = tax.level,                      # one of: 'l2.phylum', 'l3.class', 'l4.order', 'l5.family', 'l6.genus'
